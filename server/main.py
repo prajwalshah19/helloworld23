@@ -1,10 +1,9 @@
 import openai
 from flask import Flask
-
+from Keys import API_KEY
 app = Flask(__name__)
+
 '''
-# API KEY ------ HIDE -------
-API_KEY = "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"
 openai.api_key = API_KEY
 prompt = "list the top four locations to bike in New York"
 
