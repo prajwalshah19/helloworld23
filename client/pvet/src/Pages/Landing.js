@@ -1,5 +1,7 @@
 import '../App.css'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
+
 function Landing() {
 
   const [activity, setActivity] = useState("")
@@ -7,6 +9,7 @@ function Landing() {
 
   const handleActivityChange = (event) => {
     setActivity(event.target.value);
+    console.log(activity)
     if(activity == "") {
       setLoc("")
     }
@@ -16,6 +19,12 @@ function Landing() {
     setLoc(event.target.value);
 
   };
+
+  let navigate = useNavigate()
+    
+  function onButtonClick() {
+      navigate('/content')
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -39,7 +48,7 @@ function Landing() {
 
       : <></>}
       {loc != "" && activity != "" ? 
-      <button type="submit" className="bg-orange-950 text-white h-10 px-4 rounded-lg">Find Places</button>
+      <button type="submit" className="bg-orange-950 text-white h-10 px-4 rounded-lg" onClick = {onButtonClick}>Find Places</button>
 
       : <></>}
 
