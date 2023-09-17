@@ -59,7 +59,6 @@ function Landing() {
           : <></>}
           {loc != "" && activity != "" ? 
           <button type="submit" className="bg-orange-950 text-white h-10 px-4 rounded-lg">Find Places</button>
-
           : <></>}
       </form>
 
