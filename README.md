@@ -14,4 +14,3 @@
 ## Credits
 
 Contributers - Eli Dubizh, Tristan Sze, Vihaan Chadha, Prajwal Shah
-OpenAI API
