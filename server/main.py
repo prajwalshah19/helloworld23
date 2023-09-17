@@ -1,27 +1,22 @@
 import openai
 import os
+from dotenv import load_dotenv
 from flask import Flask, request, send_from_directory
-#from Keys import API_KEY
+import re
 app = Flask(__name__, static_folder="../client/pvet/build")
 
-'''
-openai.api_key = API_KEY
-prompt = "list the top four locations to bike in New York"
+load_dotenv()
+openai.api_key = os.getenv('API_KEY')
 
-response = openai.Completion.create(
-    model="text-davinci-001",
-    prompt=prompt,
-    max_tokens=1, 
-    temperature=0.4
-)
+def parse_locations(input_string):
+    # Define the regular expression pattern to match numbered locations
+    pattern = r'\d+\.\s+(.*?)(?=\n\d+\.|\Z)'
+    
+    # Use re.findall to extract all matched locations
+    locations = re.findall(pattern, input_string)
+    
+    return locations
 
-output = ""
-for result in response.choices:
-    output += result.text  # prints genearated AI response
-
-print(output)
-# print(type(output))
-'''
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -37,8 +32,14 @@ def generation():
     inputs = get_inputs()
     question = f"Where are some places I can go {inputs[0]} in {inputs[1]}?"
     print(question)
-
-    return {"generation": [question, "generation2", "generation3"]}
+    response = openai.Completion.create(
+    model="text-davinci-003",
+    prompt=question,
+    max_tokens=12, 
+    temperature=0.4 
+    )
+    print(response)
+    return {"generation": response}
 
 @app.route("/get_inputs", methods = ['POST'])
 def get_inputs():
@@ -46,7 +47,17 @@ def get_inputs():
     print("looking for activity", activity)
     location = request.form.get('location')
     print("looking for location", location)
-    return [activity, location]
+    question = f"List the top four places I can go {activity} in {location}(no newline tags in output)?"
+    print(question)
+    response = openai.Completion.create(
+    model="text-davinci-003",
+    prompt=question,
+    max_tokens=100, 
+    temperature=0.4 
+    
+    )
+    print(response)
+    return parse_locations(response["choices"][0]["text"])
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5005)
