@@ -1,17 +1,36 @@
 import '../App.css'
 import { useState } from 'react';
-function LocCard() {
+function LocCard(props) {
 
-    return (
-        <div class="flex-col lg:w-1/3 md:w-full w-full bg-orange-950 m-4 rounded-lg" >
-            <div class = "flex items-center">
-                <h1 class="text-5xl font-bold text-white mb-3 m-2">Location</h1>
-                <button type="submit" className="bg-clear border-white text-white h-10 px-4 rounded-lg" >See on Maps</button>
-            </div>
-            <p class="text-white m-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
+return (
+<body class="flex sm:flex-col h-full w-auto">
+<div class="flex-col w-full h-full bg-white m-4 rounded-lg" >
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="mx-auto max-w-2xl">
+      <h2 class="text-3xl font-bold mt-4 tracking-tight text-gray-900 text-4xl">{props.name}</h2>
+      <a href="https://www.google.com">
+            <button type="button" className="bg-clear border-white text-center text-black h-10 px-4 rounded-lg">View on Maps</button>
+      </a>
+      <p class="leading-8 text-gray-600"></p>
+    </div>
+    <div class="mx-auto mt-2 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-8 border-t border-gray-200 pt-10 mt-16 pt-16 lg:mx-0 lg:max-w-none ">
+      <article class="flex mt-0 max-w-xl flex-col items-start justify-between">
+          <div class="mt-0 text-gray-500">Current Weather</div>
+          <a href="#" class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">Marketing</a>
+        <div class="group relative">
+          <h3 class="mt-0 font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+            <a href="#">
+              <span class="absolute inset-0"></span>
+              <p class="text-black m-2">{props.description}</p>
+            </a>
+          </h3>
+          <p class="mt-5 line-clamp-3 leading-6 text-gray-600">Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.</p>
         </div>
-    )
-    }
-
+        </article>
+        </div>
+    </div>
+</div>
+</body>
+)
+}
 export default LocCard;
